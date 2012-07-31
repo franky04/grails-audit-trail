@@ -1,6 +1,10 @@
 package nineci.hibernate //grails.plugin.audittrail
-
-import java.util.logging.Logger
+import org.hibernate.EmptyInterceptor
+import org.hibernate.type.Type
+import org.apache.log4j.Logger
+import org.springframework.context.ApplicationContextAware
+import org.springframework.context.ApplicationContext
+import org.springframework.beans.factory.InitializingBean
 
 class AuditTrailHelper implements ApplicationContextAware,InitializingBean{
     private static final Logger log = Logger.getLogger(AuditTrailInterceptor)
