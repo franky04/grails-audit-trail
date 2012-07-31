@@ -35,7 +35,13 @@ class AuditTrailHelper implements ApplicationContextAware,InitializingBean{
 				}else{
 					valToSet = currentUserId()
 				}
-				entity.setProperty(field,valToSet)
+                
+				// If audit value is null (wasn't previously set for any reason), or if audit value was already set but current key is a 'last update' field ("edited...") that needs to be updated
+                def existingPropValue = entity.getProperty(field)
+                if(!existingPropValue || (existingPropValue && (key == 'editedBy' || key == 'editedDate'))){
+                    // Update field with most up to date value
+                    entity.setProperty(field,valToSet)
+                }
 			}
 		}
 
